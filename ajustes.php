@@ -15,6 +15,7 @@ if ($usuario !== NULL) {
     ?>
 <!DOCTYPE html>
 <html>
+ 
     <head>
         <meta charset="UTF-8">
         <title>Ajustes de cuenta - Kmler</title>
