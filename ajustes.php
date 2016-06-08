@@ -10,6 +10,7 @@ if($usuario === NULL){
 }
 $usuarioEmail = $usuario->getEmail();
 
+
 if ($usuario !== NULL) {
     ?>
 <!DOCTYPE html>
