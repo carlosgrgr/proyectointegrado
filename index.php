@@ -148,19 +148,17 @@ if ($usuario !== NULL) {
                     },
                     contentHeight: 700,
                     views: {
-                        month: {// name of view
+                        month: {
                             titleFormat: 'MMMM YYYY'
-                                    // other view-specific options here
                         }
                     },
                     buttonText: {
                         prevYear: 'Prev'
                     },
                     columnFormat: {
-                        month: 'dddd', // Monday, Wednesday, etc
+                        month: 'dddd',
                     },
                     dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-//                    eventColor: '#FFFFFF',
                     events: [<?php echo $eventos; ?>],
                     eventRender: function(event, element) {
                         element.find(".fc-content").append($("<span class=\"fc-event-icon\"><img src='" + event.icono + "'/></span>"));

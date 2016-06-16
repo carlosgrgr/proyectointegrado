@@ -225,8 +225,6 @@ if ($usuario !== NULL) {
                     },
                     yAxis: [
                     {
-                        labels: {
-                        },
                         title: {
                             text: 'Altura',
                             style: {
@@ -235,43 +233,20 @@ if ($usuario !== NULL) {
                             }
                         },
                         opposite: true
-                    },
-                    
+                    },                 
                     {
-                        labels: {
-//                            format: '{value} Km/h',
-//                            style: {
-//                                color: Highcharts.getOptions().colors[2]
-//                            }
-                        }
-//                        title: {
-//                            text: 'Velocidad',
-//                            style: {
-//                                color: '#0028CE',
-//                                fontSize: '1rem'
-//                            }
-//                        },
-//                        opposite: true
-                    },
-                    
-                    {
-                        labels: {
-                            //format: '{value} bpm'
-                        },
                         title: {
                             text: 'FC [ppm]',
                             style: {
                                 color: '#D10027',
                                 fontSize: '1rem'
                             }
-                        },
+                        }
                     }
                     ],
-                    
                     tooltip: {
                         shared: true
                     },
-                    
                      plotOptions: {
                         series: {
                             marker: {
@@ -301,7 +276,7 @@ if ($usuario !== NULL) {
 //                        name: 'Velocidad',
 //                        color: '#0028CE',
 //                        type: 'line',
-//                        data: <?php echo $velocidad ?>,
+//                        data: <?php //echo $velocidad ?>,
 //                        yAxis: 1,
 //                        pointInterval: 1000,
 //                        zIndex: 2
