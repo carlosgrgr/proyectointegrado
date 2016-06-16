@@ -43,7 +43,7 @@ $(window).load(function(){
                         }
                     },
                     error: function (xhr, status) {
-                        alert('Disculpe, existió un problema' + xhr + status);
+                        alert('Disculpe, se ha producido un error un problema' + xhr + status);
                     },
                 });
             }else{
@@ -152,6 +152,9 @@ $(window).load(function(){
                         success: function (response) {
                             if(response != ""){
                                 $('.form-grupo.submit').find('.mensaje').text("Usuario creado con éxito");
+                                setTimeout(function() {
+                                    window.location.href = "index.php";
+                                }, 2000);
                             }else{
                                 $('.form-grupo.submit').find('.mensaje').text("No se ha podido crear el usuario");
                             }
@@ -189,8 +192,59 @@ $(window).load(function(){
                 }
             });
         });
-    /*SUBIR ENTRENAMIENTO*/
     
+        /*Ajustes f�sicos*/
+        $('#btGuardar').on('click', function(){
+            var nombre = $('#nombre').val();
+            var apellidos = $('#apellidos').val();
+            var sexo = $('input:radio[name=sexo]:checked').val();
+            var dia = $('#select-dia option:selected').val();
+            var mes = $('#select-mes option:selected').val();
+            var ano = $('#select-ano option:selected').val();
+            var altura = $('#altura').val();
+            var peso = $('#peso').val();
+            var fcmax = $('#fcmax').val();
+            var fcrep = $('#fcrep').val();
+            var email = $('#emailReg').val(); 
+
+            var parametros = {
+                nombre: nombre,
+                apellidos: apellidos,
+                sexo: sexo,
+                dia: dia,
+                mes: mes,
+                ano: ano,
+                altura: altura,
+                peso: peso,
+                fcmax: fcmax,
+                fcrep: fcrep,
+                email: email
+            };
+            $.ajax({
+                url: 'ajax/ajaxajustes.php',
+                data: parametros,
+                type: 'post',
+                beforesend: function () {
+                    $('#btGuardar').text("Cargando...");
+                },
+                success: function (response) {
+                    if(response != "" && response != "00"){
+                        setTimeout(function() {
+                            window.location.href = "ajustes.php";
+                        }, 2000);
+                    }else{
+                        $('.form-grupo.submit').find('.mensaje').text("No se ha podido crear el usuario");
+                    }
+                },
+                error: function (xhr, status) {
+                    alert('Disculpe, existió un problema' + xhr + status);
+                },
+            });
+        });
+        
+        $('#btCancelar').on('click', function(){
+            window.location = "index.php";
+        });
 
     })();
     
@@ -242,5 +296,6 @@ function isChecked(checkbox){
     }
     return false;
 }
+
 
 

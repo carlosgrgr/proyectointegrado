@@ -42,24 +42,28 @@
             <div class="container">
                 <section id="slogan">
                     <article>
-                        <h3>¿Ya tiene una cuenta creada anteriormente con Kmler?</h3>
-                        <p>Inicie aquí una sesión con su cuenta anterior</p>
-                        <p>
-                            <button class="button" id="btLogin2">Iniciar sesión</button>
-                        </p>
-                        <h3>¿Para qué sirve una cuenta Kmler?</h3>
-                        <p>Es la puerta de entrada para tener un seguimiento total de tu actividad física y poder observar toda tu progresión.
+                        <div>
+                            <h3>¿Ya tiene una cuenta creada anteriormente con Kmler?</h3>
+                            <p>Inicie aquí una sesión con su cuenta anterior</p>
+                            <p>
+                                <button class="button" id="btLogin2">Iniciar sesión</button>
+                            </p>
+                        </div>
+                        <div>
+                            <h3>¿Para qué sirve una cuenta Kmler?</h3>
+                            <p>Es la puerta de entrada para tener un seguimiento total de tu actividad física y poder observar toda tu progresión.</p>
+                        </div>
                     </article>
                 </section>
 
                 <section id="section-registro">
-                    <form id="form-registro">
+                    <form id="form-registro" autocomplete="off">
                         <div class="form-grupo">
                             <div class="etiqueta">
                                 <label for="nombre">Nombre:</label>
                             </div>
                             <div class="caja">
-                                <input type="text" name="nombre" id="nombre"/>
+                                <input type="text" name="nombre" id="nombre"/><br/>
                                 <span class="lg-error"></span>
                             </div>
                         </div>
@@ -68,7 +72,7 @@
                                 <label for="apellidos">Apellidos:</label>
                             </div>
                             <div class="caja">
-                                <input type="text" name="apellidos" id="apellidos"/>
+                                <input type="text" name="apellidos" id="apellidos"/><br/>
                                 <span class="lg-error"></span>
                             </div>
                         </div>
@@ -77,7 +81,7 @@
                                 <label for="email">Email:</label>
                             </div>
                             <div class="caja">
-                                <input type="text" name="email" id="emailReg"/>
+                                <input type="text" name="email" id="emailReg" autocomplete="off"/><br/>
                                 <span class="lg-error"></span>
                                 
                             </div>
@@ -87,7 +91,7 @@
                                 <label for="clave">Contraseña:</label>
                             </div>
                             <div class="caja">
-                                <input type="password" name="clave" id="claveReg"/>
+                                <input type="password" name="clave" id="claveReg"/><br/>
                                 <span class="lg-error"></span>
                             </div>
                         </div>
@@ -96,7 +100,7 @@
                                 <label for="claveR">Repita su contraseña:</label>
                             </div>
                             <div class="caja">
-                                <input type="password" name="claveR" id="claveR"/>
+                                <input type="password" name="claveR" id="claveR"/><br/>
                                 <span class="lg-error"></span><br/>
                                 <span class="lg-error e2"></span>
                             </div>
@@ -128,22 +132,22 @@
         </div>
 
         <footer>
-            <div id="footer" class="container">
-                <div id="legal">
-                    <a href="#">&#169; Kmler 2016</a>
-                    <a href="#">Términos de uso</a>
-                    <a href="#">Política de privacidad</a>
-                    <a href="#">Atención al cliente</a>
+                <div id="footer" class="container">
+                    <div id="legal">
+                        <a href="#">&#169; Kmler 2016</a>
+                        <a href="#">Términos de uso</a>
+                        <a href="#">Política de privacidad</a>
+                        <a href="#">Atención al cliente</a>
+                    </div>
+                    <div id="social">
+                        <p>Síguenos en</p>
+                        <a href="#"><img id="fb" src="images/icono/facebook-icon.png" /></a>
+                        <a href="#"><img src="images/icono/twitter-icon.png" /></a>
+                        <a href="#"><img src="images/icono/instagram-icon.png" /></a>
+                        <a href="#"><img src="images/icono/youtube-icon.png" /></a>
+                    </div>
                 </div>
-                <div id="social">
-                    <p>Síguenos en</p>
-                    <img src="" />
-                    <img src="" />
-                    <img src="" />
-                    <img src="" />
-                </div>
-            </div>
-        </footer>
+            </footer>
 
         <script src="javascript/jquery-2.2.3.min.js" type="text/javascript"></script>
         <script src="javascript/main.js" type="text/javascript"></script>

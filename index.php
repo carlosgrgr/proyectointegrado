@@ -4,16 +4,21 @@ require 'lib/api.php';
 $lk = conectarKmler();
 $bd = new DataBase();
 $gestorUsuario = new ManageUsuario($bd);
+$gestorDatosfisicos = new ManageDatosfisicos($bd);
 $sesion = new Session();
 $usuario = $sesion->getUser();
 if ($usuario === NULL) {
     $sesion->sendRedirect("login.php");
 }
-$usuarioEmail = $usuario->getEmail();
+$email = $usuario->getEmail();
+$usuario = $gestorUsuario->get($email);
+$nombre = $usuario->getNombre();
+$apellidos = $usuario->getApellidos();
+$imagen = $usuario->getImagen();
 $actividades = array();
 $queryActividades = "SELECT * FROM actividades a
                         INNER JOIN deportes d ON a.deporte = d.nombre  
-                     WHERE usuario = '$usuarioEmail'";
+                     WHERE usuario = '$email'";
 
 if ($result = mysqli_query($lk, $queryActividades)) {
     while ($obj = $result->fetch_object()) {
@@ -76,14 +81,18 @@ if ($usuario !== NULL) {
                         <a href="index.php"><img src="images/kmler_logo_rgb.png" alt="logo" /></a>
                     </div>
                     <div id="boton-menu">
-                        <span class="titulo"><?php echo $usuario->getNombre() . " " . $usuario->getApellidos(); ?></span>
+                        <span class="titulo"><?php echo $nombre . " " . $apellidos; ?><img src="<?php echo $imagen; ?>"/></span>
                         <div class="contenido-form">
                             <ul class="dropdown">
-                                <li id="menu-perfil">Ver perfil</li>
+                                <a href="index.php">
+                                    <li id="menu-inicio">Inicio</li>
+                                </a>
+                                <a href="perfil.php">
+                                    <li id="menu-perfil">Ver perfil</li>
+                                </a>
                                 <a href="ajustes.php">
                                     <li id="menu-ajustes">Ajustes</li>
                                 </a>
-
                                 <li id="btLogout">Cerrar sesión</li>
                             </ul>
                         </div>
@@ -99,13 +108,6 @@ if ($usuario !== NULL) {
                 </div>
 
             </div>
-
-<!--            <form enctype="multipart/form-data" id="formuploadajax" method="post">
-                <input  type="file" id="archivo1" name="file"/>
-                <br />
-                <button id="upload" value="Subir archivos">Importar</button>
-            </form>    
-            <div id="mensaje"></div>-->
 
             <footer>
                 <div id="footer" class="container">

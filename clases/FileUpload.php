@@ -8,7 +8,9 @@ class FileUpload {
     private $subido = false;
     private $arrayDeTipos = array(
         "tcx" => 1,
-        "kml" => 1
+        "kml" => 1,
+        "jpg" => 1,
+        "png" => 1
     );
     private $extension;
 

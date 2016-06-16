@@ -4,12 +4,17 @@ require 'lib/api.php';
 $lk = conectarKmler();
 $bd = new DataBase();
 $gestorUsuario = new ManageUsuario($bd);
+$gestorDatosfisicos = new ManageDatosfisicos($bd);
 $sesion = new Session();
 $usuario = $sesion->getUser();
 if ($usuario === NULL) {
     $sesion->sendRedirect("login.php");
 }
-$usuarioEmail = $usuario->getEmail();
+$email = $usuario->getEmail();
+$usuario = $gestorUsuario->get($email);
+$nombre = $usuario->getNombre();
+$apellidos = $usuario->getApellidos();
+$imagen = $usuario->getImagen();
 $deportes = array();
 $queryDeportes = "select nombre from deportes";
 if ($result = mysqli_query($lk, $queryDeportes)) {
@@ -53,10 +58,15 @@ if ($usuario !== NULL) {
                         <a href="index.php"><img src="images/kmler_logo_rgb.png" alt="logo" /></a>
                     </div>
                     <div id="boton-menu">
-                        <span class="titulo"><?php echo $usuario->getNombre() . " " . $usuario->getApellidos(); ?></span>
+                         <span class="titulo"><?php echo $nombre . " " . $apellidos; ?><img src="<?php echo $imagen; ?>"/></span>
                         <div class="contenido-form">
                             <ul class="dropdown">
-                                <li id="menu-perfil">Ver perfil</li>
+                                <a href="index.php">
+                                    <li id="menu-inicio">Inicio</li>
+                                </a>
+                                <a href="perfil.php">
+                                    <li id="menu-perfil">Ver perfil</li>
+                                </a>
                                 <a href="ajustes.php">
                                     <li id="menu-ajustes">Ajustes</li>
                                 </a>
@@ -73,7 +83,7 @@ if ($usuario !== NULL) {
             <div id="wrapper-import">
                 <div id="formularios" class="container">
                     <h2>Añadir el resultado de un entrenamiento</h2>
-                    <div id="import-manual">
+                    <div id="import-archivo">
                         <section id="slogan">
                             <form action="subir.php" method="post" enctype="multipart/form-data">
                                 <article>
@@ -87,17 +97,18 @@ if ($usuario !== NULL) {
                                     </div>
                                     <div class="row-form">
                                         <span>Archivo: </span>
-                                        <input type="file" name="archivo" id="archivo"/>
+                                        <input type="file" name="archivo" id="archivo" class="inputfile"/>
+                                        <label for="archivo" class="button">Elige un archivo</label>
                                     </div>
                                     <p>
-                                        <input type="submit" class="button" id="btimport" value="Subir archivo" />
+                                        <input type="submit" class="button" id="btimport" value="Importar" />
                                     </p>
                                 </article>
                             </form>
                         </section>
                     </div>
 
-                    <div id="import-archivo">
+                    <div id="import-manual">
 
                     </div>
                 </div>
@@ -113,14 +124,14 @@ if ($usuario !== NULL) {
                     </div>
                     <div id="social">
                         <p>Síguenos en</p>
-                        <img src="" />
-                        <img src="" />
-                        <img src="" />
-                        <img src="" />
+                        <a href="#"><img id="fb" src="images/icono/facebook-icon.png" /></a>
+                        <a href="#"><img src="images/icono/twitter-icon.png" /></a>
+                        <a href="#"><img src="images/icono/instagram-icon.png" /></a>
+                        <a href="#"><img src="images/icono/youtube-icon.png" /></a>
                     </div>
                 </div>
             </footer>
-        
+        <script src="assets/CustomFileInputs/js/custom-file-input.js"></script> 
     </body>
 </html>
 <?php

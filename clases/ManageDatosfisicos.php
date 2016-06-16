@@ -1,74 +1,66 @@
 <?php
 
-class ManageUsuario {
+class ManageDatosfisicos {
     
     private $bd = null;
-    private $tabla = "usuarios";
+    private $tabla = "datosfisicos";
     
     function __construct(DataBase $bd) {
         $this->bd = $bd;
     }
     
-    function get($email) {
+    function get($email, $fecha) {
         //devuelve el objeto de la fila cuyo email coincide con el email que le estoy pasando;
         //devuelve el objeto entero;
         $parametros = array();
         $parametros["email"] = $email;
-        $this->bd->select($this->tabla, "*", "email =:email", $parametros);
+        $parametros["fecha"] = $fecha;
+        $this->bd->select($this->tabla, "*", "email =:email and fecha =:fecha", $parametros);
         $fila = $this->bd->getRow();
-        $usuario = new Usuario();
-        $usuario->set($fila);
-        return $usuario;
+        $datosfisicos = new Datosfisicos();
+        $datosfisicos->set($fila);
+        return $datosfisicos;
     }
     
     function count($condicion="1=1", $parametros=array()){
         return $this->bd->count($this->tabla, $condicion, $parametros);
     }
             
-    function delete($email) {
+    function delete($email, $fecha) {
         //borrar por id
         $parametros = array();
         $parametros["email"] = $email;
+        $parametros["fecha"] = $fecha;
         return $this->bd->delete($this->tabla, $parametros);
     }
     
-    function set(Usuario $usuario, $pkEmail) {
-        //update de todos los campos 
-        //pasamos el codigo que tenia y como en este si se puede cambiar el codigo, cambiamos todos los campos
-        //dice el numero de filas modificades
-        $parametros = $usuario->getArray();
-        $parametrosWhere = array();
-        $parametrosWhere["email"] = $pkEmail;
-        $this->bd->update($this->tabla, $parametros, $parametrosWhere);
-    }
-    
-    function insert(Usuario $usuario) {
+    function insert(Datosfisicos $datosfisicos) {
         //se le pasa un objeto City y lo inserta en la tabla
         //dice el numero de filas insertadas;
         $parametrosSet = array();
-        $parametrosSet["email"]=$usuario->getEmail();
-        $parametrosSet["clave"]=$usuario->getClave();
-        $parametrosSet["nombre"]=$usuario->getNombre();
-        $parametrosSet["apellidos"]=$usuario->getApellidos();
-        $parametrosSet["sexo"]=$usuario->getSexo();
-        $parametrosSet["fechanacimiento"]=$usuario->getFechanacimiento();
-        $parametrosSet["img"]=$usuario->getImagen();
+        $parametrosSet["email"]=$datosfisicos->getEmail();
+        $parametrosSet["fecha"]=$datosfisicos->getFecha();
+        $parametrosSet["altura"]=$datosfisicos->getAltura();
+        $parametrosSet["peso"]=$datosfisicos->getPeso();
+        $parametrosSet["fcmax"]=$datosfisicos->getFcmax();
+        $parametrosSet["fcmed"]=$datosfisicos->getFcmed();
+        $parametrosSet["imc"]=$datosfisicos->getImc();
         return $this->bd->insert($this->tabla, $parametrosSet);
     }
     
     function getList($pagina=1, $orden="", $nrpp=Constants::NRPP, $condicion ="1=1", $parametros=array()) {
-        $ordenPredeterminado = "$orden, nombre, email";
+        $ordenPredeterminado = "$orden, fecha, email";
         if(trim($orden)==="" || trim($orden)===null){
-            $ordenPredeterminado = "nombre, email";
+            $ordenPredeterminado = "fecha, email";
         }
         $registroInicial = ($pagina - 1) * $nrpp;
         $this->bd->select($this->tabla, "*", $condicion, $parametros, $ordenPredeterminado,
                 "$registroInicial, $nrpp");
         $r = array();
         while ($fila = $this->bd->getRow()){
-            $usuario = new Usuario();
-            $usuario->set($fila);
-            $r[] = $usuario;
+            $datosfisicos = new Datosfisicos();
+            $datosfisicos->set($fila);
+            $r[] = $datosfisicos;
         }
         return $r;
     }
@@ -81,15 +73,6 @@ class ManageUsuario {
         }
         $r = substr($r, 0, -1) . "]";
         return $r;
-    }
-    
-    function getValuesSelect() {
-        $this->bd->query($this->tabla, "ID, Name", array(), "Name");
-        $array = array();
-        while ($fila = $this->bd->getRow()){
-            $array[$fila[0]] = $fila[1];
-        }
-        return $array;
     }
     
 }

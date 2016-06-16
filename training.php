@@ -7,11 +7,17 @@ $lk = conectarKmler();
 $bd = new DataBase();
 $gestorUsuario = new ManageUsuario($bd);
 $gestorActividad = new ManageActividad($bd);
+$gestorDatosfisicos = new ManageDatosfisicos($bd);
 $sesion = new Session();
 $usuario = $sesion->getUser();
 if ($usuario === NULL) {
     $sesion->sendRedirect("login.php");
 }
+$email = $usuario->getEmail();
+$usuario = $gestorUsuario->get($email);
+$nombre = $usuario->getNombre();
+$apellidos = $usuario->getApellidos();
+$imagen = $usuario->getImagen();
 $id = Request::get("id");
 $actividad = $gestorActividad->get($id);
 $deporte = $actividad->getDeporte();
@@ -38,7 +44,7 @@ $tcx = new Tcx($urltcx);
 $datos = $tcx->getDatos($urltcx);
 $duracion = $datos['duracion'];
 $distancia = $datos['distancia'];
-$pulsomedio = $datos['pulsomedio'];
+$pulsomedio = number_format($datos["pulsomedio"], 0, '.', '');
 $calorias = $datos['calorias'];
 
 $pulso = $tcx->getPulso($urltcx);
@@ -78,14 +84,18 @@ if ($usuario !== NULL) {
                     <a href="index.php"><img src="images/kmler_logo_rgb.png" alt="logo" /></a>
                 </div>
                 <div id="boton-menu">
-                    <span class="titulo"><?php echo $usuario->getNombre() . " " . $usuario->getApellidos(); ?></span>
+                    <span class="titulo"><?php echo $nombre . " " . $apellidos; ?><img src="<?php echo $imagen; ?>"/></span>
                     <div class="contenido-form">
                         <ul class="dropdown">
-                            <li id="menu-perfil">Ver perfil</li>
+                            <a href="index.php">
+                                <li id="menu-inicio">Inicio</li>
+                            </a>
+                            <a href="perfil.php">
+                                <li id="menu-perfil">Ver perfil</li>
+                            </a>
                             <a href="ajustes.php">
                                 <li id="menu-ajustes">Ajustes</li>
                             </a>
-
                             <li id="btLogout">Cerrar sesión</li>
                         </ul>
                     </div>

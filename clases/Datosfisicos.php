@@ -1,74 +1,73 @@
 <?php
 
-class Usuario {
+class Datosfisicos {
     
-    private $email, $clave, $nombre, $apellidos, $sexo, $fechanacimiento, $imagen;
+    private $email, $fecha, $altura, $peso, $fcmax, $fcmed, $imc;
             
-    function __construct($email = null, $clave = null, $nombre = null, $apellidos = null, $sexo = null, 
-            $fechanacimiento = null, $imagen = null) {
+    function __construct($email = null, $fecha = null, $altura = null, $peso = null, $fcmax = null, $fcmed = null, $imc = null) {
         $this->email = $email;
-        $this->clave = $clave;
-        $this->nombre = $nombre;
-        $this->apellidos = $apellidos;
-        $this->sexo = $sexo;
-        $this->fechanacimiento = $fechanacimiento;
-        $this->imagen = $imagen;
+        $this->fecha = $fecha;
+        $this->altura = $altura;
+        $this->peso = $peso;
+        $this->fcmax = $fcmax;
+        $this->fcmed = $fcmed;
+        $this->imc = $imc;
     }
     
     function getEmail() {
         return $this->email;
     }
 
-    function getClave() {
-        return $this->clave;
+    function getFecha() {
+        return $this->fecha;
     }
 
-    function getNombre() {
-        return $this->nombre;
+    function getAltura() {
+        return $this->altura;
     }
 
-    function getApellidos() {
-        return $this->apellidos;
+    function getPeso() {
+        return $this->peso;
     }
 
-    function getSexo() {
-        return $this->sexo;
+    function getFcmax() {
+        return $this->fcmax;
+    }
+    
+    function getFcmed() {
+        return $this->fcmed;
     }
 
-    function getFechanacimiento() {
-        return $this->fechanacimiento;
-    }
-
-    function getImagen() {
-        return $this->imagen;
+    function getImc() {
+        return $this->imc;
     }
 
     function setEmail($email) {
         $this->email = $email;
     }
 
-    function setClave($clave) {
-        $this->clave = $clave;
+    function setFecha($fecha) {
+        $this->fecha = $fecha;
     }
 
-    function setNombre($nombre) {
-        $this->nombre = $nombre;
+    function setAltura($altura) {
+        $this->altura = $altura;
     }
 
-    function setApellidos($apellidos) {
-        $this->apellidos = $apellidos;
+    function setPeso($peso) {
+        $this->peso = $peso;
     }
 
-    function setSexo($sexo) {
-        $this->sexo = $sexo;
+    function setFcmax($fcmax) {
+        $this->fcmax = $fcmax;
+    }
+    
+    function setFcmed($fcmed) {
+        $this->fcmed = $fcmed;
     }
 
-    function setFechanacimiento($fechanacimiento) {
-        $this->fechanacimiento = $fechanacimiento;
-    }
-
-    function setImagen($imagen) {
-        $this->imagen = $imagen;
+    function setImc($imc) {
+        $this->imc = $imc;
     }
 
     public function getJson() {

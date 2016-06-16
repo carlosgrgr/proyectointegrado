@@ -102,7 +102,7 @@ class Tcx {
             $dom->loadXML($texto);
             $pulso = "([";
             $trackpoints = $dom->getElementsByTagName('Trackpoint');
-            for ($i = 0; $i < $trackpoints->length; $i=$i+20){
+            for ($i = 0; $i < $trackpoints->length; $i=$i+40){
                 $heartRate = $trackpoints[$i]->getElementsByTagName('HeartRateBpm')->item(0)->nodeValue;
                 $pulso .= "$heartRate,";
             }
@@ -119,7 +119,7 @@ class Tcx {
             $dom->loadXML($texto);
             $altura = "([";
             $trackpoints = $dom->getElementsByTagName('Trackpoint');
-            for ($i = 0; $i < $trackpoints->length; $i=$i+20){
+            for ($i = 0; $i < $trackpoints->length; $i=$i+40){
                 $altitude = number_format($trackpoints[$i]->getElementsByTagName('AltitudeMeters')->item(0)->nodeValue, 2, '.', '');
                 $altura .= "$altitude,";
             }
