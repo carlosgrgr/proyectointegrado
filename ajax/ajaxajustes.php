@@ -25,9 +25,17 @@ $alturametros = $altura / 100;
 $imc = $peso / ($alturametros * $alturametros);
 $imc = number_format($imc, 2, '.', '');
 
-$insert = "INSERT INTO datosfisicos(usuario, fecha, altura, peso, fcmax, fcrep, imc)
-        VALUES ('$email', '$fechaactual', $altura, $peso, $fcmax, $fcrep, $imc)";
-echo mysqli_query($lk, $insert);
+$query = "SELECT * FROM datosfisicos WHERE usuario = '$email' AND fecha = '$fechaactual'";
+$result = mysqli_query($lk, $query);
+
+if($result->num_rows > 0){
+    $updateDatosfisicos = "UPDATE datosfisicos SET altura = $altura, peso = $peso, fcmax = $fcmax, fcrep = $fcrep, imc = $imc WHERE usuario = '$email' AND fecha = '$fechaactual'";
+    echo mysqli_query($lk, $updateDatosfisicos);
+}else{
+    $insert = "INSERT INTO datosfisicos(usuario, fecha, altura, peso, fcmax, fcrep, imc)
+                VALUES ('$email', '$fechaactual', $altura, $peso, $fcmax, $fcrep, $imc)";
+    echo mysqli_query($lk, $insert);
+}
 
 $update = "UPDATE usuarios SET nombre= '$nombre', apellidos = '$apellidos', sexo = '$sexo',
             fechanacimiento = '$fechanacimiento' WHERE email = '$email'";

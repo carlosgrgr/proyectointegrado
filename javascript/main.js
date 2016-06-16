@@ -193,7 +193,7 @@ $(window).load(function(){
             });
         });
     
-        /*Ajustes f�sicos*/
+        /*Ajustes físicos*/
         $('#btGuardar').on('click', function(){
             var nombre = $('#nombre').val();
             var apellidos = $('#apellidos').val();
@@ -231,13 +231,15 @@ $(window).load(function(){
                     if(response != "" && response != "00"){
                         setTimeout(function() {
                             window.location.href = "ajustes.php";
-                        }, 2000);
+                        }, 10);
                     }else{
-                        $('.form-grupo.submit').find('.mensaje').text("No se ha podido crear el usuario");
+                        setTimeout(function() {
+                            window.location.href = "ajustes.php?error=guardar";
+                        }, 10);
                     }
                 },
                 error: function (xhr, status) {
-                    alert('Disculpe, existió un problema' + xhr + status);
+                    alert('Disculpe, existiÃ³ un problema' + xhr + status);
                 },
             });
         });
