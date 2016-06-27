@@ -1,4 +1,4 @@
-# proyectointegrado
+# KMLER (Proyecto Integrado)
 
 Vivimos en una época en la que por suerte el mundo del deporte está cada vez más de moda y día tras día la gente encuentra una actividad física que le sirve para desconectar del ajetreo diario. Si juntamos esto con las últimas tecnologías diseñadas para el mundo del deporte, encontramos infinidad de dispositivos móviles y wearables destinados al seguimiento y análisis de la actividad física y la progresión del deportista.
 
